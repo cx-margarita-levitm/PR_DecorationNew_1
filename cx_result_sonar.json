@@ -1,0 +1,31 @@
+{
+	"rules": [
+		{
+			"id": "Unpinned Actions Full Length Commit SHA",
+			"name": "Unpinned Actions Full Length Commit SHA",
+			"description": "Pinning an action to a full length commit SHA is currently the only way to use an action as an immutable release. Pinning to a particular SHA helps mitigate the risk of a bad actor adding a backdoor to the action&#39;s repository, as they would need to generate a SHA-1 collision for a valid Git object payload. When selecting a SHA, you should verify it is from the action&#39;s repository and not a repository fork.",
+			"engineId": "kics",
+			"cleanCodeAttribute": "FORMATTED",
+			"impacts": [
+				{
+					"softwareQuality": "SECURITY",
+					"severity": "LOW"
+				}
+			]
+		}
+	],
+	"issues": [
+		{
+			"ruleId": "Unpinned Actions Full Length Commit SHA",
+			"primaryLocation": {
+				"message": "Action is not pinned to a full length commit SHA.",
+				"filePath": ".github/workflows/main.yml",
+				"textRange": {
+					"startLine": 17,
+					"endColumn": 1
+				}
+			},
+			"secondaryLocations": null
+		}
+	]
+}
