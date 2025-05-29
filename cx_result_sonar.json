@@ -1,6 +1,122 @@
 {
 	"rules": [
 		{
+			"id": "Java - Missing_HSTS_Header",
+			"name": "Missing_HSTS_Header",
+			"description": "The web-application does not define an HSTS header, leaving it vulnerable to attack.\n\n",
+			"engineId": "sast",
+			"cleanCodeAttribute": "FORMATTED",
+			"impacts": [
+				{
+					"softwareQuality": "SECURITY",
+					"severity": "BLOCKER"
+				}
+			]
+		},
+		{
+			"id": "Java - SQL_Injection",
+			"name": "SQL_Injection",
+			"description": "The application&#39;s  method executes an SQL query with executeUpdate, at line 43 of /changeCardDetails.jsp. The application constructs this SQL query by embedding an untrusted string into the query without proper sanitization. The concatenated string is submitted to the database, where it is parsed and executed accordingly.\n\nAn attacker would be able to inject arbitrary syntax and data into the SQL query, by crafting a malicious payload and providing it via the input &#34;&#34;cvv&#34;&#34;; this input is then read by the  method at line 38 of /changeCardDetails.jsp. This input then flows through the code, into a query and to the database server - without sanitization.\r\n\r\nThis may enable an SQL Injection attack.\n\n",
+			"engineId": "sast",
+			"cleanCodeAttribute": "FORMATTED",
+			"impacts": [
+				{
+					"softwareQuality": "SECURITY",
+					"severity": "BLOCKER"
+				}
+			]
+		},
+		{
+			"id": "3Z2oVcACAKqF5RgU3n1S1I5TjHM=",
+			"name": "Hashicorp-Tf-Password",
+			"description": "Identified a HashiCorp Terraform password field, risking unauthorized infrastructure configuration and security breaches.",
+			"engineId": "sscs-secret-detection",
+			"cleanCodeAttribute": "FORMATTED",
+			"impacts": [
+				{
+					"softwareQuality": "SECURITY",
+					"severity": "HIGH"
+				}
+			]
+		},
+		{
+			"id": "Java - Use_Of_Hardcoded_Password",
+			"name": "Use_Of_Hardcoded_Password",
+			"description": "The application uses the hard-coded password password for authentication purposes, either using it to verify users&#39; identities, or to access another remote system. This password at line 24 of /AddPageVru.java appears in the code, implying it is accessible to anyone with source code access, and cannot be changed without rebuilding the application.",
+			"engineId": "sast",
+			"cleanCodeAttribute": "FORMATTED",
+			"impacts": [
+				{
+					"softwareQuality": "SECURITY",
+					"severity": "HIGH"
+				}
+			]
+		},
+		{
+			"id": "TR/32G0ZmFUWHMXtOT39C9rDuEI=",
+			"name": "Hashicorp-Tf-Password",
+			"description": "Identified a HashiCorp Terraform password field, risking unauthorized infrastructure configuration and security breaches.",
+			"engineId": "sscs-secret-detection",
+			"cleanCodeAttribute": "FORMATTED",
+			"impacts": [
+				{
+					"softwareQuality": "SECURITY",
+					"severity": "HIGH"
+				}
+			]
+		},
+		{
+			"id": "Java - CSRF",
+			"name": "CSRF",
+			"description": "Method  at line 39 of /changeCardDetails.jsp gets a parameter from a user request from &#34;&#34;expirydate&#34;&#34;. This parameter value flows through the code and is eventually used to access application state altering functionality. This may enable Cross-Site Request Forgery (CSRF).\n\n",
+			"engineId": "sast",
+			"cleanCodeAttribute": "FORMATTED",
+			"impacts": [
+				{
+					"softwareQuality": "SECURITY",
+					"severity": "MEDIUM"
+				}
+			]
+		},
+		{
+			"id": "Java - Trust_Boundary_Violation_in_Session_Variables",
+			"name": "Trust_Boundary_Violation_in_Session_Variables",
+			"engineId": "sast",
+			"cleanCodeAttribute": "FORMATTED",
+			"impacts": [
+				{
+					"softwareQuality": "SECURITY",
+					"severity": "MEDIUM"
+				}
+			]
+		},
+		{
+			"id": "Java - Relative_Path_Traversal",
+			"name": "Relative_Path_Traversal",
+			"description": "Method  at line 39 of /AddPage.java gets dynamic data from the &#34;&#34;filename&#34;&#34; element. This element’s value then flows through the code and is eventually used in a file path for local disk access in  at line 45 of /AddPage.java. This may cause a Path Traversal vulnerability.\n\n",
+			"engineId": "sast",
+			"cleanCodeAttribute": "FORMATTED",
+			"impacts": [
+				{
+					"softwareQuality": "SECURITY",
+					"severity": "MEDIUM"
+				}
+			]
+		},
+		{
+			"id": "Java - Reflected_XSS",
+			"name": "Reflected_XSS",
+			"description": "The method  embeds untrusted data in generated output with print, at line 56 of /AddPageVru.java. This untrusted data is embedded into the output without proper sanitization or encoding, enabling an attacker to inject malicious code into the generated web-page.\n\nThe attacker would be able to alter the returned web page by simply providing modified data in the user input &#34;&#34;filename&#34;&#34;, which is read by the  method at line 40 of /AddPageVru.java. This input then flows through the code straight to the output web page, without sanitization. \r\n\r\nThis can enable a Reflected Cross-Site Scripting (XSS) attack.\n\n",
+			"engineId": "sast",
+			"cleanCodeAttribute": "FORMATTED",
+			"impacts": [
+				{
+					"softwareQuality": "SECURITY",
+					"severity": "MEDIUM"
+				}
+			]
+		},
+		{
 			"id": "Unpinned Actions Full Length Commit SHA",
 			"name": "Unpinned Actions Full Length Commit SHA",
 			"description": "Pinning an action to a full length commit SHA is currently the only way to use an action as an immutable release. Pinning to a particular SHA helps mitigate the risk of a bad actor adding a backdoor to the action&#39;s repository, as they would need to generate a SHA-1 collision for a valid Git object payload. When selecting a SHA, you should verify it is from the action&#39;s repository and not a repository fork.",
@@ -15,6 +131,739 @@
 		}
 	],
 	"issues": [
+		{
+			"ruleId": "Java - Missing_HSTS_Header",
+			"primaryLocation": {
+				"message": "Missing HSTS Header",
+				"filePath": "changeCardDetails.jsp",
+				"textRange": {
+					"startLine": 1,
+					"startColumn": 23,
+					"endColumn": 29
+				}
+			},
+			"secondaryLocations": null
+		},
+		{
+			"ruleId": "Java - SQL_Injection",
+			"primaryLocation": {
+				"message": "SQL Injection",
+				"filePath": "changeCardDetails.jsp",
+				"textRange": {
+					"startLine": 38,
+					"startColumn": 40,
+					"endColumn": 45
+				}
+			},
+			"secondaryLocations": [
+				{
+					"message": "SQL Injection",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 38,
+						"startColumn": 39,
+						"endColumn": 40
+					}
+				},
+				{
+					"message": "SQL Injection",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 38,
+						"startColumn": 15,
+						"endColumn": 18
+					}
+				},
+				{
+					"message": "SQL Injection",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 40,
+						"startColumn": 34,
+						"endColumn": 37
+					}
+				},
+				{
+					"message": "SQL Injection",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 43,
+						"startColumn": 107,
+						"endColumn": 110
+					}
+				},
+				{
+					"message": "SQL Injection",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 43,
+						"startColumn": 27,
+						"endColumn": 28
+					}
+				}
+			]
+		},
+		{
+			"ruleId": "Java - SQL_Injection",
+			"primaryLocation": {
+				"message": "SQL Injection",
+				"filePath": "changeCardDetails.jsp",
+				"textRange": {
+					"startLine": 37,
+					"startColumn": 43,
+					"endColumn": 51
+				}
+			},
+			"secondaryLocations": [
+				{
+					"message": "SQL Injection",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 37,
+						"startColumn": 42,
+						"endColumn": 43
+					}
+				},
+				{
+					"message": "SQL Injection",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 37,
+						"startColumn": 15,
+						"endColumn": 21
+					}
+				},
+				{
+					"message": "SQL Injection",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 40,
+						"startColumn": 12,
+						"endColumn": 18
+					}
+				},
+				{
+					"message": "SQL Injection",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 43,
+						"startColumn": 94,
+						"endColumn": 100
+					}
+				},
+				{
+					"message": "SQL Injection",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 43,
+						"startColumn": 27,
+						"endColumn": 28
+					}
+				}
+			]
+		},
+		{
+			"ruleId": "Java - SQL_Injection",
+			"primaryLocation": {
+				"message": "SQL Injection",
+				"filePath": "changeCardDetails.jsp",
+				"textRange": {
+					"startLine": 39,
+					"startColumn": 47,
+					"endColumn": 59
+				}
+			},
+			"secondaryLocations": [
+				{
+					"message": "SQL Injection",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 39,
+						"startColumn": 46,
+						"endColumn": 47
+					}
+				},
+				{
+					"message": "SQL Injection",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 39,
+						"startColumn": 15,
+						"endColumn": 25
+					}
+				},
+				{
+					"message": "SQL Injection",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 40,
+						"startColumn": 53,
+						"endColumn": 63
+					}
+				},
+				{
+					"message": "SQL Injection",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 43,
+						"startColumn": 117,
+						"endColumn": 127
+					}
+				},
+				{
+					"message": "SQL Injection",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 43,
+						"startColumn": 27,
+						"endColumn": 28
+					}
+				}
+			]
+		},
+		{
+			"ruleId": "3Z2oVcACAKqF5RgU3n1S1I5TjHM=",
+			"primaryLocation": {
+				"message": "Extract password \"Vru*** from codebase and store securely in a vault.",
+				"filePath": "/AddPageVru.java",
+				"textRange": {
+					"startLine": 24,
+					"startColumn": 1,
+					"endColumn": 2
+				}
+			},
+			"secondaryLocations": null
+		},
+		{
+			"ruleId": "Java - Use_Of_Hardcoded_Password",
+			"primaryLocation": {
+				"message": "Use Of Hardcoded Password",
+				"filePath": "AddPageVru.java",
+				"textRange": {
+					"startLine": 24,
+					"startColumn": 14,
+					"endColumn": 22
+				}
+			},
+			"secondaryLocations": null
+		},
+		{
+			"ruleId": "TR/32G0ZmFUWHMXtOT39C9rDuEI=",
+			"primaryLocation": {
+				"message": "Extract password \"Vru*** from codebase and store securely in a vault.",
+				"filePath": "/AddPageVru.java",
+				"textRange": {
+					"startLine": 25,
+					"startColumn": 1,
+					"endColumn": 2
+				}
+			},
+			"secondaryLocations": null
+		},
+		{
+			"ruleId": "Java - Use_Of_Hardcoded_Password",
+			"primaryLocation": {
+				"message": "Use Of Hardcoded Password",
+				"filePath": "AddPageVru.java",
+				"textRange": {
+					"startLine": 25,
+					"startColumn": 18,
+					"endColumn": 27
+				}
+			},
+			"secondaryLocations": null
+		},
+		{
+			"ruleId": "Java - CSRF",
+			"primaryLocation": {
+				"message": "CSRF",
+				"filePath": "changeCardDetails.jsp",
+				"textRange": {
+					"startLine": 39,
+					"startColumn": 47,
+					"endColumn": 59
+				}
+			},
+			"secondaryLocations": [
+				{
+					"message": "CSRF",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 39,
+						"startColumn": 46,
+						"endColumn": 47
+					}
+				},
+				{
+					"message": "CSRF",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 39,
+						"startColumn": 15,
+						"endColumn": 25
+					}
+				},
+				{
+					"message": "CSRF",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 40,
+						"startColumn": 53,
+						"endColumn": 63
+					}
+				},
+				{
+					"message": "CSRF",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 43,
+						"startColumn": 117,
+						"endColumn": 127
+					}
+				},
+				{
+					"message": "CSRF",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 43,
+						"startColumn": 27,
+						"endColumn": 28
+					}
+				}
+			]
+		},
+		{
+			"ruleId": "Java - Trust_Boundary_Violation_in_Session_Variables",
+			"primaryLocation": {
+				"message": "Trust Boundary Violation in Session Variables",
+				"filePath": "AddPageVru.java",
+				"textRange": {
+					"startLine": 90,
+					"startColumn": 22,
+					"endColumn": 23
+				}
+			},
+			"secondaryLocations": null
+		},
+		{
+			"ruleId": "Java - CSRF",
+			"primaryLocation": {
+				"message": "CSRF",
+				"filePath": "changeCardDetails.jsp",
+				"textRange": {
+					"startLine": 38,
+					"startColumn": 40,
+					"endColumn": 45
+				}
+			},
+			"secondaryLocations": [
+				{
+					"message": "CSRF",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 38,
+						"startColumn": 39,
+						"endColumn": 40
+					}
+				},
+				{
+					"message": "CSRF",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 38,
+						"startColumn": 15,
+						"endColumn": 18
+					}
+				},
+				{
+					"message": "CSRF",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 40,
+						"startColumn": 34,
+						"endColumn": 37
+					}
+				},
+				{
+					"message": "CSRF",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 43,
+						"startColumn": 107,
+						"endColumn": 110
+					}
+				},
+				{
+					"message": "CSRF",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 43,
+						"startColumn": 27,
+						"endColumn": 28
+					}
+				}
+			]
+		},
+		{
+			"ruleId": "Java - Trust_Boundary_Violation_in_Session_Variables",
+			"primaryLocation": {
+				"message": "Trust Boundary Violation in Session Variables",
+				"filePath": "AddPage.java",
+				"textRange": {
+					"startLine": 103,
+					"startColumn": 22,
+					"endColumn": 23
+				}
+			},
+			"secondaryLocations": null
+		},
+		{
+			"ruleId": "Java - Trust_Boundary_Violation_in_Session_Variables",
+			"primaryLocation": {
+				"message": "Trust Boundary Violation in Session Variables",
+				"filePath": "AddPageVru.java",
+				"textRange": {
+					"startLine": 104,
+					"startColumn": 22,
+					"endColumn": 23
+				}
+			},
+			"secondaryLocations": null
+		},
+		{
+			"ruleId": "Java - Relative_Path_Traversal",
+			"primaryLocation": {
+				"message": "Relative Path Traversal",
+				"filePath": "AddPage.java",
+				"textRange": {
+					"startLine": 39,
+					"startColumn": 48,
+					"endColumn": 58
+				}
+			},
+			"secondaryLocations": [
+				{
+					"message": "Relative Path Traversal",
+					"filePath": "AddPage.java",
+					"textRange": {
+						"startLine": 39,
+						"startColumn": 47,
+						"endColumn": 48
+					}
+				},
+				{
+					"message": "Relative Path Traversal",
+					"filePath": "AddPage.java",
+					"textRange": {
+						"startLine": 39,
+						"startColumn": 18,
+						"endColumn": 26
+					}
+				},
+				{
+					"message": "Relative Path Traversal",
+					"filePath": "AddPage.java",
+					"textRange": {
+						"startLine": 44,
+						"startColumn": 41,
+						"endColumn": 49
+					}
+				},
+				{
+					"message": "Relative Path Traversal",
+					"filePath": "AddPage.java",
+					"textRange": {
+						"startLine": 44,
+						"startColumn": 19,
+						"endColumn": 27
+					}
+				},
+				{
+					"message": "Relative Path Traversal",
+					"filePath": "AddPage.java",
+					"textRange": {
+						"startLine": 45,
+						"startColumn": 28,
+						"endColumn": 36
+					}
+				},
+				{
+					"message": "Relative Path Traversal",
+					"filePath": "AddPage.java",
+					"textRange": {
+						"startLine": 45,
+						"startColumn": 19,
+						"endColumn": 22
+					}
+				}
+			]
+		},
+		{
+			"ruleId": "Java - Relative_Path_Traversal",
+			"primaryLocation": {
+				"message": "Relative Path Traversal",
+				"filePath": "AddPageVru.java",
+				"textRange": {
+					"startLine": 40,
+					"startColumn": 48,
+					"endColumn": 58
+				}
+			},
+			"secondaryLocations": [
+				{
+					"message": "Relative Path Traversal",
+					"filePath": "AddPageVru.java",
+					"textRange": {
+						"startLine": 40,
+						"startColumn": 47,
+						"endColumn": 48
+					}
+				},
+				{
+					"message": "Relative Path Traversal",
+					"filePath": "AddPageVru.java",
+					"textRange": {
+						"startLine": 40,
+						"startColumn": 18,
+						"endColumn": 26
+					}
+				},
+				{
+					"message": "Relative Path Traversal",
+					"filePath": "AddPageVru.java",
+					"textRange": {
+						"startLine": 45,
+						"startColumn": 41,
+						"endColumn": 49
+					}
+				},
+				{
+					"message": "Relative Path Traversal",
+					"filePath": "AddPageVru.java",
+					"textRange": {
+						"startLine": 45,
+						"startColumn": 19,
+						"endColumn": 27
+					}
+				},
+				{
+					"message": "Relative Path Traversal",
+					"filePath": "AddPageVru.java",
+					"textRange": {
+						"startLine": 46,
+						"startColumn": 28,
+						"endColumn": 36
+					}
+				},
+				{
+					"message": "Relative Path Traversal",
+					"filePath": "AddPageVru.java",
+					"textRange": {
+						"startLine": 46,
+						"startColumn": 19,
+						"endColumn": 22
+					}
+				}
+			]
+		},
+		{
+			"ruleId": "Java - Trust_Boundary_Violation_in_Session_Variables",
+			"primaryLocation": {
+				"message": "Trust Boundary Violation in Session Variables",
+				"filePath": "AddPage.java",
+				"textRange": {
+					"startLine": 34,
+					"startColumn": 19,
+					"endColumn": 33
+				}
+			},
+			"secondaryLocations": null
+		},
+		{
+			"ruleId": "Java - CSRF",
+			"primaryLocation": {
+				"message": "CSRF",
+				"filePath": "changeCardDetails.jsp",
+				"textRange": {
+					"startLine": 37,
+					"startColumn": 43,
+					"endColumn": 51
+				}
+			},
+			"secondaryLocations": [
+				{
+					"message": "CSRF",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 37,
+						"startColumn": 42,
+						"endColumn": 43
+					}
+				},
+				{
+					"message": "CSRF",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 37,
+						"startColumn": 15,
+						"endColumn": 21
+					}
+				},
+				{
+					"message": "CSRF",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 40,
+						"startColumn": 12,
+						"endColumn": 18
+					}
+				},
+				{
+					"message": "CSRF",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 43,
+						"startColumn": 94,
+						"endColumn": 100
+					}
+				},
+				{
+					"message": "CSRF",
+					"filePath": "changeCardDetails.jsp",
+					"textRange": {
+						"startLine": 43,
+						"startColumn": 27,
+						"endColumn": 28
+					}
+				}
+			]
+		},
+		{
+			"ruleId": "Java - Reflected_XSS",
+			"primaryLocation": {
+				"message": "Reflected XSS",
+				"filePath": "AddPageVru.java",
+				"textRange": {
+					"startLine": 40,
+					"startColumn": 48,
+					"endColumn": 58
+				}
+			},
+			"secondaryLocations": [
+				{
+					"message": "Reflected XSS",
+					"filePath": "AddPageVru.java",
+					"textRange": {
+						"startLine": 40,
+						"startColumn": 47,
+						"endColumn": 48
+					}
+				},
+				{
+					"message": "Reflected XSS",
+					"filePath": "AddPageVru.java",
+					"textRange": {
+						"startLine": 40,
+						"startColumn": 18,
+						"endColumn": 26
+					}
+				},
+				{
+					"message": "Reflected XSS",
+					"filePath": "AddPageVru.java",
+					"textRange": {
+						"startLine": 56,
+						"startColumn": 96,
+						"endColumn": 104
+					}
+				},
+				{
+					"message": "Reflected XSS",
+					"filePath": "AddPageVru.java",
+					"textRange": {
+						"startLine": 56,
+						"startColumn": 29,
+						"endColumn": 30
+					}
+				}
+			]
+		},
+		{
+			"ruleId": "Java - Trust_Boundary_Violation_in_Session_Variables",
+			"primaryLocation": {
+				"message": "Trust Boundary Violation in Session Variables",
+				"filePath": "AddPageVru.java",
+				"textRange": {
+					"startLine": 35,
+					"startColumn": 19,
+					"endColumn": 33
+				}
+			},
+			"secondaryLocations": null
+		},
+		{
+			"ruleId": "Java - Reflected_XSS",
+			"primaryLocation": {
+				"message": "Reflected XSS",
+				"filePath": "AddPage.java",
+				"textRange": {
+					"startLine": 39,
+					"startColumn": 48,
+					"endColumn": 58
+				}
+			},
+			"secondaryLocations": [
+				{
+					"message": "Reflected XSS",
+					"filePath": "AddPage.java",
+					"textRange": {
+						"startLine": 39,
+						"startColumn": 47,
+						"endColumn": 48
+					}
+				},
+				{
+					"message": "Reflected XSS",
+					"filePath": "AddPage.java",
+					"textRange": {
+						"startLine": 39,
+						"startColumn": 18,
+						"endColumn": 26
+					}
+				},
+				{
+					"message": "Reflected XSS",
+					"filePath": "AddPage.java",
+					"textRange": {
+						"startLine": 55,
+						"startColumn": 96,
+						"endColumn": 104
+					}
+				},
+				{
+					"message": "Reflected XSS",
+					"filePath": "AddPage.java",
+					"textRange": {
+						"startLine": 55,
+						"startColumn": 29,
+						"endColumn": 30
+					}
+				}
+			]
+		},
+		{
+			"ruleId": "Java - Trust_Boundary_Violation_in_Session_Variables",
+			"primaryLocation": {
+				"message": "Trust Boundary Violation in Session Variables",
+				"filePath": "AddPage.java",
+				"textRange": {
+					"startLine": 89,
+					"startColumn": 22,
+					"endColumn": 23
+				}
+			},
+			"secondaryLocations": null
+		},
 		{
 			"ruleId": "Unpinned Actions Full Length Commit SHA",
 			"primaryLocation": {
