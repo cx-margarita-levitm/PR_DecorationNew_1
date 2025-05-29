@@ -12,10 +12,6 @@ public class BookDetail_jsp extends HttpJspBase {
 //   JSP.ccp build 05/21/2001
 //
 
-
-
-
-  
   static final String CRLF = "\r\n";
 
 // TEst lital
@@ -76,7 +72,10 @@ public class BookDetail_jsp extends HttpJspBase {
       rsLookUp.close();
       stat1.close();
       conn1.close();
-      return res;
+      return (res == null ? "" : res);
+    }
+    catch (Exception e) {
+      return "";
     }
   }
 
@@ -126,7 +125,10 @@ public class BookDetail_jsp extends HttpJspBase {
 
   String toHTML(String value) {
     if ( value == null ) return "";
-
+    value = replace(value, "&", "&amp;");
+    value = replace(value, "<", "&lt;");
+    value = replace(value, ">", "&gt;");
+    value = replace(value, "\"", "&" + "quot;");
     return value;
   }
 
@@ -329,7 +331,7 @@ public class BookDetail_jsp extends HttpJspBase {
         }
         else {
           if (old.equals(";") && (val.equals(";"))) {
-            val = "1";
+            val = "";
           }
         }
         if ( val.equals(";") ) { val = ""; }
@@ -398,7 +400,7 @@ public class BookDetail_jsp extends HttpJspBase {
       Object o1 = session.getAttribute("UserID");
       Object o2 = session.getAttribute("UserRights");
       boolean bRedirect = false;
-      
+      if ( o1 == null || o2 == null ) { bRedirect = true; }
       if ( ! bRedirect ) {
         if ( (o1.toString()).equals("")) { bRedirect = true; }
         else if ( (new Integer(o2.toString())).intValue() < iLevel) { bRedirect = true; }
@@ -409,7 +411,7 @@ public class BookDetail_jsp extends HttpJspBase {
         return "sendRedirect";
       }
     }
-    
+    catch(Exception e){};
     return "";
   }
 
